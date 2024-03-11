@@ -142,15 +142,20 @@
 
 let playerScore = 0;
 let computerScore = 0;
-let computerSelection = computerChoice();
-let playerSelection = playerChoice();
 
-function playerChoice(){
-    //    let pChoice = window.prompt("Let's play Rock, Paper, Scissors! :D");
-    //    pChoice = pChoice.charAt(0).toUpperCase() + pChoice.slice(1).toLowerCase();
-    //    return pChoice;
-    
-    }
+const rockbtn = document.querySelector('.rock');
+const paperbtn = document.querySelector('.paper');
+const scissorsbtn = document.querySelector('.scissors');
+// const outcome = document.querySelector('.output');
+
+
+
+// function playerChoice(){
+//     //    let pChoice = window.prompt("Let's play Rock, Paper, Scissors! :D");
+//     //    pChoice = pChoice.charAt(0).toUpperCase() + pChoice.slice(1).toLowerCase();
+//     //    return pChoice;
+
+//     }
 
 function computerChoice(){
     let pcChoice = ["Rock", "Paper", "Scissors"];
@@ -159,20 +164,49 @@ function computerChoice(){
 }
 
 function playRound (playerSelection, computerSelection){
-    console.log(computerSelection);
     if (playerSelection === computerSelection){
-        console.log("It's a draw!");
+        const p = document.createElement('p');
+        p.classList.add('draw');
+        p.innerText = playerSelection + " vs " + computerSelection + ". It's a draw!";
+        outcome.appendChild(p);
     }
     else if (playerSelection === 'Rock' && computerSelection === 'Scissors' || 
              playerSelection === 'Paper' && computerSelection === 'Rock' ||
              playerSelection === 'Scissors' && computerSelection === 'Paper'){
-        console.log("You win!");
+        playerScore++;
+        const p = document.createElement('p');
+        p.classList.add('win');
+        p.innerText = playerSelection + " vs " + computerSelection + ". You win!";
+        outcome.appendChild(p);
     }
     else if (playerSelection === 'Rock' && computerSelection === 'Paper' || 
              playerSelection === 'Paper' && computerSelection === 'Scissors' ||
-             playerSelection === 'Scissors' && computerSelection === 'Rock')
-        console.log("You lose!");
+             playerSelection === 'Scissors' && computerSelection === 'Rock'){
+        computerScore++;
+        const p = document.createElement('p');
+        p.classList.add('lose');
+        p.innerText = playerSelection + " vs " + computerSelection + ". You lose!";
+        outcome.appendChild(p);
+    }
 }
 
-console.log(playRound(playerSelection, computerSelection));
+rockbtn.addEventListener('click', () => {
+    const computerSelection = computerChoice();
+    const playerSelection = 'Rock';
+    playRound(playerSelection, computerSelection);
+});
+
+paperbtn.addEventListener('click', () => {
+    const computerSelection = computerChoice();
+    const playerSelection = 'Paper';
+    playRound(playerSelection, computerSelection);
+});
+
+scissorsbtn.addEventListener('click', () => {
+    const computerSelection = computerChoice();
+    const playerSelection = 'Scissors';
+    playRound(playerSelection, computerSelection);
+});
+
+// console.log(playRound(playerSelection, computerSelection));
 
