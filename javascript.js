@@ -146,7 +146,7 @@ let computerScore = 0;
 const rockbtn = document.querySelector('.rock');
 const paperbtn = document.querySelector('.paper');
 const scissorsbtn = document.querySelector('.scissors');
-// const outcome = document.querySelector('.output');
+const outcome = document.querySelector('.output');
 
 
 
@@ -169,6 +169,7 @@ function playRound (playerSelection, computerSelection){
         p.classList.add('draw');
         p.innerText = playerSelection + " vs " + computerSelection + ". It's a draw!";
         outcome.appendChild(p);
+        
     }
     else if (playerSelection === 'Rock' && computerSelection === 'Scissors' || 
              playerSelection === 'Paper' && computerSelection === 'Rock' ||
@@ -190,22 +191,38 @@ function playRound (playerSelection, computerSelection){
     }
 }
 
+const checkScore = (playerScore, computerScore) => {
+    if (playerScore === 5){
+        const h1 = document.createElement('h1');
+        h1.innerText = "Congrats! You've attained 5 points!";
+        outcome.appendChild(h1);
+    }
+    else if (computerScore === 5){
+        const h1 = document.createElement('h1');
+        h1.innerText = "Sorry, Computer won 5 points";
+        outcome.appendChild(h1);
+    }
+}
+
 rockbtn.addEventListener('click', () => {
     const computerSelection = computerChoice();
     const playerSelection = 'Rock';
     playRound(playerSelection, computerSelection);
+    checkScore(playerScore, computerScore);
 });
 
 paperbtn.addEventListener('click', () => {
     const computerSelection = computerChoice();
     const playerSelection = 'Paper';
     playRound(playerSelection, computerSelection);
+    checkScore(playerScore, computerScore);
 });
 
 scissorsbtn.addEventListener('click', () => {
     const computerSelection = computerChoice();
     const playerSelection = 'Scissors';
     playRound(playerSelection, computerSelection);
+    checkScore(playerScore, computerScore);
 });
 
 // console.log(playRound(playerSelection, computerSelection));
